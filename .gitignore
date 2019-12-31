@@ -1,0 +1,15 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+rn_temp/
+node_modules/
+.DS_Store
+.idea/
+package-lock.json
+.vscode/
+*.log
+src/configuration/
+project.config.json
+selenium-debug.log
+

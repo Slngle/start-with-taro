@@ -1,0 +1,49 @@
+@import '../../../configuration/configUitype/theme.less';
+
+.NetworkError_id65004 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.error-dog {
+  width: 506px;
+  height: 342px;
+}
+
+.reconnect {
+  display: flex;
+  padding: 0 15px;
+  margin: 120px auto 0;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background-color: @primary;
+  &-text {
+    font-size: 32px;
+    color: @primarytext;
+  }
+}
+
+.content {
+  margin-top: 60px;
+  &-text {
+    text-align: center;
+    font-size: 28px;
+    color: #999999;
+  }
+}
+
+.hide {
+  position: absolute;
+  top: -10000px;
+}

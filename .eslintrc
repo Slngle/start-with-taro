@@ -1,0 +1,26 @@
+{
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "taro"],
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "Taro"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", ".tsx"]
+      }
+    ],
+    "taro/no-stateless-component": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/forbid-elements": "off",
+    "taro/no-spread-in-props": "off",
+    "import/no-commonjs": "off",
+    "jsx-quotes": "off",
+    "import/first": "off"
+  },
+  "plugins": ["html", "prettier"],
+  "parser": "babel-eslint"
+}

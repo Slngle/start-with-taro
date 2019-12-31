@@ -1,0 +1,15 @@
+rn_temp/
+ios/
+android/
+dist/
+build/
+.temp/
+node_modules/
+src/static/images/
+index.ios.jsbundle
+index.ios.jsbundle.meta
+/assets
+.prettierignore
+yarn.lock
+README.md
+.gitignore
