@@ -26,10 +26,8 @@
     "dev:qq": "npm run build:qq -- --watch",
     "dev:quickapp": "npm run build:quickapp -- --watch",
     "template": "FRAMEWORK=taro node fancy-world/nvwa-manito/index.js -t",
-    "packaging:weapp": "FRAMEWORK=taro node fancy-world/destiny-river/build.js --type build:weapp",
-    "start:weapp": "FRAMEWORK=taro node fancy-world/destiny-river/start.js --type dev:weapp",
-    "packaging:rn": "FRAMEWORK=taro node fancy-world/destiny-river/build.js --type build:rn",
-    "start:rn": "FRAMEWORK=taro node fancy-world/destiny-river/start.js --type dev:rn"
+    "packaging": "FRAMEWORK=taro node fancy-world/destiny-river/build.js",
+    "start": "FRAMEWORK=taro node fancy-world/destiny-river/start.js"
   },
   "author": "yujunmiao",
   "license": "MIT",

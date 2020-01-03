@@ -21,19 +21,14 @@
 
 #### 如何开始
 
-##### 小程序
+##### 1. npm install -g @tarojs/cli@1.3.29
 
-##### 1. [下载小程序开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html?t=18102216)
+##### 2. yarn
 
-##### 2. npm install -g @tarojs/cli@1.3.29
+##### 3. yarn start --type (weapp or rn) 默认weapp
 
-##### 3. npm install
+##### 4. yarn packaging --type (weapp or rn) 默认weapp
 
-##### 4. npm run dev:(weapp or h5 or rn)
-
-##### 5. npm run build:(weapp or h5 or rn)
-
-##### 6. 小程序开发者工具创建个项目 appid 为 xxx ，目录为 dist/weapp
 
 #### 页面模版 组件模版 分包页面模版 自动创建
 
@@ -73,15 +68,16 @@
 
 ##### h5 上面 window.onscroll 滚不动 element 为.taro-tabbar\_\_panel 才滚得动
 
+
 #### 开发注意！！！
 
-##### 1. 所有 taro 的 api 请不要直接使用，到 crosslpatform 里去寻找，有一一对应，没有的话你创建一个一一对应的。（原因：可以在里面处理 api 的跨平台问题）
+##### 1. 所有 taro 的 api 请不要直接使用，到 cross-patform 里去寻找，有一一对应，没有的话你创建一个一一对应的。（原因：可以在里面处理 api 的跨平台问题）
 
 ##### 2. 调用定时器的页面请在 onHide 和 onUnload 的时候将定时器关了 onLoad 或 onShow 的时候再开启 不然会一直 setdata
 
-##### 3. 如果 reducers/index.js；有冲突 直接 createmini --updatestore(us) 可以更新（会自动读取文件）
+##### 3. src/store/reducers/index.js 和 configuration里面的配置；是ignore的只要run start 或者 run packaging 就能自动创建
 
-##### 4. 页面跳转请到 configuration/pagejumplist.json;找到页面的 key 不要直接写路径跳转
+##### 4. 页面跳转请到 configuration/config-pages/index.json;找到页面的 key 不要直接写路径跳转
 
 ##### 5. 小程序基础库 2.3.0 以上(为了支持分包预加载)
 

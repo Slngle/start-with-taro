@@ -11,6 +11,7 @@ spinner.start()
 if (!argv.env) {
   argv.env = 'daily'
 }
+
 new Transformers({ argv, position: 'devserver' })
   .init()
   .then(({ status, message }) => {
@@ -21,13 +22,18 @@ new Transformers({ argv, position: 'devserver' })
         text: message
       })
 
-      const Start = spawn('yarn', [`${argv.type}`], { stdio: 'inherit' }, (err, stdout, stderr) => {
-        if (err) {
-          console.error(`exec error: ${err}`)
-          process.exit(1)
-          return
+      const Start = spawn(
+        'yarn',
+        [`dev:${argv.type}`],
+        { stdio: 'inherit' },
+        (err, stdout, stderr) => {
+          if (err) {
+            console.error(`exec error: ${err}`)
+            process.exit(1)
+            return
+          }
         }
-      })
+      )
     } else {
       spinner.fail(message)
     }

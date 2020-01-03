@@ -7,13 +7,13 @@ exports.createPage = async ({ name, folderPath, title, flow, path }) => {
   let templates
   if (flow == 'mobx') {
     const { getPageTempalte } = require('../../template/page/mobx')
-    templates = getPageTempalte({ name, folderPath })
+    templates = getPageTempalte({ name, folderPath, title })
   } else if (flow == 'redux') {
     const { getPageTempalte } = require('../../template/page/redux')
     templates = getPageTempalte({ name, folderPath, title })
   } else {
     const { getPageTempalte } = require('../../template/page/simple')
-    templates = getPageTempalte({ name, folderPath })
+    templates = getPageTempalte({ name, folderPath, title })
   }
   const { status, message } = await createbase({ templates })
   if (status) {

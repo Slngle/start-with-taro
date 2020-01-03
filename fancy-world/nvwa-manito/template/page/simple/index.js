@@ -2,7 +2,7 @@ const { getFormatName } = require('../../utils')
 const { pageGlobal } = require('./template/page-global')
 const { pageIndex, pageCss } = require('./template/page-index')
 
-exports.getPageTempalte = ({ name, folderPath }) => {
+exports.getPageTempalte = ({ name, folderPath, title }) => {
   const { normalName, tName, pageTName, cssUniName } = getFormatName({ name })
   return [
     {
@@ -13,7 +13,7 @@ exports.getPageTempalte = ({ name, folderPath }) => {
     {
       filePath: `/config.json`,
       folderPath: `${folderPath}/${normalName}`,
-      tempate: `{ flow: '' }`
+      tempate: `{ "flow": "" }`
     },
     {
       folderPath: `${folderPath}/${normalName}/${normalName}-global`,
@@ -23,7 +23,7 @@ exports.getPageTempalte = ({ name, folderPath }) => {
     {
       folderPath: `${folderPath}/${normalName}`,
       filePath: `/index.js`,
-      tempate: pageIndex({ name: tName, cssname: cssUniName })
+      tempate: pageIndex({ name: tName, pageTName, cssname: cssUniName, title })
     },
     {
       folderPath: `${folderPath}/${normalName}`,

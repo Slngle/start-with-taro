@@ -1,6 +1,6 @@
 import { UPDATEUSERINFO, RESETUSERINFO } from '../types/user-info'
 import { handleActions } from 'redux-actions'
-import { setStorageByKey } from '../../configuration/config-localstorage'
+import { setStorageByKey } from '../../utils/loadashmin/storage'
 
 const Schema = {}
 
