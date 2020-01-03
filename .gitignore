@@ -12,4 +12,5 @@ package-lock.json
 src/configuration/
 project.config.json
 selenium-debug.log
+src/store/reducers/index.js
 

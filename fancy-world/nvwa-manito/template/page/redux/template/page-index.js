@@ -152,21 +152,21 @@ export default class ${name} extends Component {
     }
     
     return (
-      <div className="${cssname}">
+      <View className="${cssname}">
         <NavigationBar navigationBarTitle="${title}" goback />
-        <NetworkError visible={this.props.networkError} onReload={this.onReload}></NetworkError>
+        <NetworkError visible={this.props.networkError} onReload={this.onReload} />
         {!this.props.networkError ? (
           <View className="${cssname}-wrap" style={style}>
             {showEmpty ? (
               <AbnormalFlow text="none" />
             ) : (
               <ScrollView style={style} scrollY onScrollToLower={this.onScrollToLower}>
-                hello world!
+                <Text>hello world!</Text>
               </ScrollView>
             )}
           </View>
         ) : null}
-      </div>
+      </View>
     )
   }
 }`

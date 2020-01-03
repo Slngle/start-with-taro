@@ -4,20 +4,19 @@ import { View, Text, Image } from '@tarojs/components'
 //less
 import './index.less'
 import gobackPng from '../../../static/images/goback.png'
-import { navigateBack } from '../../apiservice/navigate'
-import { configenvOutput } from '../../../configuration/configenv-output'
-import { getSystemInfoSync } from '../../apiservice/systemInfo'
+import { navigateBack } from '../../api-platform/router'
+import { getSystemInfoSync } from '../../api-platform/equipment/system-info'
+import { configUi } from '../../../global-data'
 
-const NAVIGATORTITLE_HEIGHT = configenvOutput.NAVIGATORTITLE_HEIGHT
-
-const statusBarHeight = configenvOutput.statusBarHeight
-const { windowWidth } = getSystemInfoSync()
+const NAVIGATORTITLE_HEIGHT = configUi.NAVIGATORTITLE_HEIGHT
+const { windowWidth, statusBarHeight } = getSystemInfoSync()
 const statusBarHeightIn750 = (statusBarHeight * 750) / windowWidth
 
 class NavigationBar extends Component {
   static defaultProps = {
     goBack: false,
     navigationBarColor: '#ffffff',
+    color: '#232323',
     navigationBarTitle: '',
     line: true,
     tspBar: false // 透明头
@@ -29,9 +28,9 @@ class NavigationBar extends Component {
 
   componentDidMount() {}
 
-  componentWillUnmount() {}
-
   componentWillReceiveProps(nextprops) {}
+
+  componentWillUnmount() {}
 
   onNavigationBack = () => {
     const { goback } = this.props
@@ -42,7 +41,7 @@ class NavigationBar extends Component {
   }
 
   render() {
-    const { goback, navigationBarTitle, navigationBarColor, line, tspBar } = this.props
+    const { goback, navigationBarTitle, navigationBarColor, line, tspBar, color } = this.props
     const styleWrap = {}
 
     if (!tspBar) {
@@ -81,7 +80,7 @@ class NavigationBar extends Component {
               {goback ? <Image className="header-8273-wrap-left-image" src={gobackPng} /> : null}
             </View>
             <View className="header-8273-wrap-middle">
-              <Text className="header-8273-wrap-middle-text">
+              <Text className="header-8273-wrap-middle-text" style={{ color: color }}>
                 {navigationBarTitle != 'true' ? navigationBarTitle : ''}
               </Text>
             </View>

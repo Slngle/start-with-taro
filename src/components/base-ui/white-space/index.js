@@ -12,14 +12,14 @@ class WhiteSpace extends Component {
 
   componentDidMount() {}
 
-  componentWillUnmount() {}
-
   componentWillReceiveProps(nextprops) {}
+
+  componentWillUnmount() {}
 
   render() {
     return (
       <View className="whit-9285">
-        <View className="whit-9285-linespit"></View>
+        <View className="whit-9285-linespit" />
       </View>
     )
   }

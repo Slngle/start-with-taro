@@ -67,7 +67,8 @@ exports.formatEnv = function() {
  */
 exports.updatePages = async function() {
   const json = await getPageList()
-  await setPageList(json)
+  await setRootReduce()
+  return await setPageList(json)
 }
 
 /**
@@ -75,6 +76,15 @@ exports.updatePages = async function() {
  * @type {function()}
  */
 exports.getPageList = getPageList
+
+/**
+ *
+ * @returns {Promise<void>}
+ */
+async function setRootReduce() {
+  const reducersList = await getReducerList()
+  return await setReducerList(reducersList)
+}
 
 /**
  *
@@ -99,13 +109,69 @@ async function getPageList() {
   return json
 }
 
+/**
+ * @desc 获取reducer
+ * @returns {Promise<Array>}
+ */
+async function getReducerList() {
+  const { filepath } = require('./filepath')
+  const { pageArrow } = filepath
+  let reducersList = []
+  for (const data of pageArrow) {
+    const folderPath = data.value
+    const folderName = data.folder
+    const pages = fs.readdirSync(folderPath) || []
+    for (const page of pages) {
+      const inPageName = fs.readdirSync(`${folderPath}/${page}`)
+      if (inPageName && inPageName.includes('store')) {
+        const reducers = fs.readdirSync(`${folderPath}/${page}/store/reducers`)
+        reducers.forEach(reducerName => {
+          reducersList.push({
+            name: reducerName.replace(/\.js/, ''),
+            path: `../../${folderName}/${page}/store/reducers/${reducerName}`
+          })
+        })
+      }
+    }
+  }
+  const storePath = filepath.storePath
+  const reducerGloble = fs.readdirSync(`${storePath}`)
+  reducerGloble.forEach(reducerName => {
+    if (reducerName != 'index.js') {
+      reducersList.push({
+        name: reducerName.replace(/\.js/, ''),
+        path: `./${reducerName}`
+      })
+    }
+  })
+  return reducersList
+}
+
 async function setPageList(json) {
   const { filepath } = require('./filepath')
   const pageAllPath = filepath.pageAllPath
   const error = fs.mkdirSync(pageAllPath.replace(/\/[^/]+$/, ''), { recursive: true })
   if (!error) {
     fs.writeFileSync(pageAllPath, JSON.stringify(json, null, 2))
-    return true
+    return json
   }
-  return false
+  return {}
+}
+
+async function setReducerList(list = []) {
+  const { filepath } = require('./filepath')
+  const storePath = filepath.storePath
+  let importT = ''
+  let reducerT = ''
+  list.forEach(data => {
+    importT += `import ${data.name} from '${data.path}'\r\n`
+    reducerT += `${data.name},`
+  })
+  let template = `import { combineReducers } from 'redux'
+  ${importT}
+  export default combineReducers({
+    ${reducerT}
+  })`
+  fs.writeFileSync(`${storePath}/index.js`, template)
+  return true
 }

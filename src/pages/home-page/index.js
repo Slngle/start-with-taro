@@ -9,6 +9,7 @@ import { getWindowHeight } from '../../cross-platform/api-platform/equipment/sys
 import NetworkError from '../../components/base-ui/network-error'
 import AbnormalFlow from '../../components/base-ui/abnormal-flow'
 import NavigationBar from '../../cross-platform/components-platform/customize-header'
+import { configMini } from '../../configuration/config-ui'
 
 let timer = null
 
@@ -110,23 +111,27 @@ export default class HomePage extends Component {
     const style = {
       height: getWindowHeight(false, true)
     }
-
     return (
-      <div className="Home-1658">
-        <NavigationBar navigationBarTitle="首页" goback />
-        <NetworkError visible={this.props.networkError} onReload={this.onReload}></NetworkError>
+      <View className="Home-1658">
+        <NavigationBar
+          navigationBarTitle="首页"
+          navigationBarColor={configMini.primary}
+          color={configMini.primarytext}
+          line={false}
+        />
+        <NetworkError visible={this.props.networkError} onReload={this.onReload} />
         {!this.props.networkError ? (
           <View className="Home-1658-wrap" style={style}>
             {showEmpty ? (
               <AbnormalFlow text="none" />
             ) : (
               <ScrollView style={style} scrollY onScrollToLower={this.onScrollToLower}>
-                hello world!
+                <Text> hello world!</Text>
               </ScrollView>
             )}
           </View>
         ) : null}
-      </div>
+      </View>
     )
   }
 }

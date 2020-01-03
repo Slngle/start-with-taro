@@ -3,16 +3,12 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 //less
 import './index.less'
-import { pagejumpoutput } from '../../../configuration/pagejump-output'
-
-import nodata from '../../../static/images/nodata.png'
-
 import {
   getCurrentPageList,
   navigateBack,
-  reLaunch,
   switchTab
 } from '../../../cross-platform/api-platform/router'
+import { configMini } from '../../../configuration/config-ui'
 
 class AbnormalFlow extends Component {
   state = {
@@ -24,7 +20,7 @@ class AbnormalFlow extends Component {
     styleWrap: {},
     imgLink: '',
     content: '阿欧，没有数据哦 ~',
-    text: '' //text === null 就不展示按钮
+    text: 'none' //text === none 就不展示按钮
   }
 
   componentWillMount() {
@@ -62,22 +58,17 @@ class AbnormalFlow extends Component {
     if (keytap === 'nomaltap') {
       this.props.onTap && this.props.onTap()
     } else if (keytap === 'gohomepage') {
-      this.gohomepage()
+      this.goHomepage()
     } else if (keytap === 'goback') {
       navigateBack()
     }
   }
 
-  gohomepage() {
-    if (this.props.shopType == 'category') {
-      reLaunch({
-        url: pagejumpoutput['home-page'].path
-      })
-    } else {
-      switchTab({
-        url: pagejumpoutput['home-page'].path
-      })
-    }
+  goHomepage() {
+    const pages = require('../../../configuration/config-pages/index.json')
+    switchTab({
+      url: pages['home-page'].path
+    })
   }
 
   render() {
@@ -85,8 +76,12 @@ class AbnormalFlow extends Component {
     const { textFormat } = this.state
     return (
       <View className="abno-94065" style={styleWrap}>
-        {imgLink || nodata ? (
-          <Image className="abno-94065-image" src={imgLink || nodata} mode="widthFix" />
+        {imgLink ? (
+          <Image
+            className="abno-94065-image"
+            src={imgLink || configMini.nosearch}
+            mode="widthFix"
+          />
         ) : null}
         <View className="abno-94065-titlein">
           <Text className="abno-94065-titlein-text">{content}</Text>
